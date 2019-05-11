@@ -9,7 +9,7 @@ Instead of
 ```elixir
 defmodule MyModule do
   def render_html(title) do
-    "<h1 class="a class I need" some-other-attribute="This get complicated to prevent typos">#{title}</h1>
+    "<h1 class="a class I need" some-other-attribute="This get complicated to prevent typos">#{title}</h1>"
   end
 end
 ```
@@ -38,7 +38,7 @@ defmodule Bootstrap do
   use Duplo.Tag, [:button, :ul, :li]
 
   def btn(text, color \\ "primary") do
-    button([class: "btn btn-xs btn-#{color}], text)
+    button([class: "btn btn-xs btn-#{color}"], text)
   end
 
   @ul_class "list-group"
