@@ -6,8 +6,21 @@ defmodule Duplo.MixProject do
       app: :duplo,
       version: "0.1.0",
       elixir: "~> 1.8",
+      name: "Duplo",
+      description:
+        "Duplo is a HTML buiilder based on function calls. Instead of writing whole HTML you can simple call functions.",
+      source_url: "https://github.com/nicklayb/duplo",
       start_permanent: Mix.env() == :prod,
-      deps: []
+      deps: [],
+      package: package()
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["Nicolas Boisvert"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/nicklayb/duplo"}
     ]
   end
 
