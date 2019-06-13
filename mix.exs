@@ -11,7 +11,9 @@ defmodule Duplo.MixProject do
         "Duplo is a HTML buiilder based on function calls. Instead of writing whole HTML you can simple call functions.",
       source_url: "https://github.com/nicklayb/duplo",
       start_permanent: Mix.env() == :prod,
-      deps: [],
+      deps: [
+        {:ex_doc, ">= 0.0.0", only: :dev}
+      ],
       package: package()
     ]
   end
