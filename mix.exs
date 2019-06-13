@@ -4,7 +4,7 @@ defmodule Duplo.MixProject do
   def project do
     [
       app: :duplo,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.8",
       name: "Duplo",
       description:

@@ -9,10 +9,10 @@ defmodule Duplo.Tag do
       use Duplo.Tag, [:div, :span]  # Defines div/2 and span/2
     end
 
-    iex> Module.div(class: "button")
+    iex> TagTest.Module.div(class: "button")
     "<div class=\"button\"></div>"
 
-    iex> Module.span(class: "button")
+    iex> TagTest.Module.span(class: "button")
     "<span class=\"button\"></span>"
     ```
   """
@@ -24,7 +24,7 @@ defmodule Duplo.Tag do
 
     ```
     iex> Duplo.Tag.render_tag("master-tag", [special_attr: "A value"], ["Child"])
-    "<master-tag special-attr=\"A value\">Child</master-tag>""
+    "<master-tag special-attr=\"A value\">Child</master-tag>"
     ```
   """
   @spec render_tag(atom() | bitstring()) :: String.t()
@@ -37,15 +37,21 @@ defmodule Duplo.Tag do
   def render_tag(tag, attrs, children) when is_atom(tag),
     do: render_tag(Atom.to_string(tag), attrs, children)
 
-  def render_tag(tag, attrs, children) when is_bitstring(tag),
-    do: "<#{tag} #{render_attributes(attrs)}>#{render_children(children)}</#{tag}>"
+  def render_tag(tag, attrs, children) when is_bitstring(tag) do
+    open_tag =
+      [tag, render_attributes(attrs)]
+      |> Enum.filter(fn string -> String.length(string) > 0 end)
+      |> Enum.join(" ")
+
+    "<#{open_tag}>#{render_children(children)}</#{tag}>"
+  end
 
   @doc ~S"""
     Format a list of attributes to be output in HTML. It dashes the key ("HelloWorld" key becomes "hello-world") and sanitize the value
 
     ## Examples
     ```
-    iex> Duplo.Tag.render_attributes([class, "btn btn-xs btn-primary"])
+    iex> Duplo.Tag.render_attributes([class: "btn btn-xs btn-primary"])
     "class=\"btn btn-xs btn-primary\""
     ```
   """

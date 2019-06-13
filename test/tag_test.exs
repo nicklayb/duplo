@@ -3,8 +3,12 @@ defmodule TagTest do
   alias Duplo.Tag
   doctest Duplo.Tag
 
+  defmodule Module do
+    use Duplo.Tag, [:div, :span]
+  end
+
   test "defined tag function" do
-    assert "<div ></div>" == Builder.div()
+    assert "<div></div>" == Builder.div()
   end
 
   test "defined tag function with attributes" do
@@ -19,7 +23,7 @@ defmodule TagTest do
       Builder.span()
     ]
 
-    assert "<div class=\"#{class}\"><span ></span></div>" == Builder.div([class: class], children)
+    assert "<div class=\"#{class}\"><span></span></div>" == Builder.div([class: class], children)
   end
 
   test "defines tag list" do
@@ -32,7 +36,7 @@ defmodule TagTest do
   end
 
   test "render only tag" do
-    assert "<tag ></tag>" = Tag.render_tag("tag")
+    assert "<tag></tag>" = Tag.render_tag("tag")
   end
 
   test "render tag with attributes" do
@@ -45,7 +49,7 @@ defmodule TagTest do
       Tag.render_tag("blue")
     ]
 
-    assert "<tag style=\"background-color: red;\"><blue ></blue></tag>" =
+    assert "<tag style=\"background-color: red;\"><blue></blue></tag>" =
              Tag.render_tag("tag", [style: "background-color: red;"], children)
   end
 end
